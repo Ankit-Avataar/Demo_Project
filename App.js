@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     height: 100,
     textAlignVertical: 'center',
     textAlign: 'center',
-    borderColor: 'red',
+    borderColor: 'blue',
     borderWidth: 2,
   }
 });
