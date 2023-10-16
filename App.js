@@ -1,29 +1,32 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Home } from './components/Home';
-import { Login } from './components/Login';
-
+import { Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
 
 export default function App() {
-  const Stack = createNativeStackNavigator();
+  const [data,setData] = useState(undefined);
+
+  const getApiData = async () => {
+    const url = "https://jsonplaceholder.typicode.com/posts/1";
+    let result = await fetch(url);
+    result = await result.json();
+    setData(result);
+  }
+
+  useEffect(()=>{
+    getApiData();
+  },[])
   return (
-    <NavigationContainer>
-      <Stack.Navigator 
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: 'blue',
-        },
-        headerTintColor: 'white',
-        headerTitleStyle: {
-          fontSize: 30,
-        }
-      }}
-      >
-        <Stack.Screen name = 'Login' component={Login}
-        />
-        <Stack.Screen name = 'Home' component={Home}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View>
+      <Text style={{fontSize: 30, marginTop: 40}}>API Call</Text>
+      {
+        data?
+        <View>
+          <Text style={{fontSize: 30}}>{data.id}</Text>
+          <Text style={{fontSize: 30}}>{data.userId}</Text>
+          <Text style={{fontSize: 30}}>{data.title}</Text>
+          <Text style={{fontSize: 30}}>{data.body}</Text>
+        </View>:null
+      }
+    </View>
   );
 }
 
