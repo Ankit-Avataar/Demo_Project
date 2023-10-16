@@ -1,47 +1,32 @@
-import { SectionList, Text, View} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { Home } from './components/Home';
+import { Login } from './components/Login';
 
-const users = [
-  {
-    id: 1,
-    name: 'Ankit',
-    data: ['reactjs','hmtl','css'],
-  },
-  {
-    id: 2,
-    name: 'Kanishk',
-    data: ['c++','c','java'],
-  },
-  {
-    id: 3,
-    name: 'Anjan',
-    data: ['python','angular','bootstrap'],
-  },
-  {
-    id: 4,
-    name: 'Kishan',
-    data: ['HTML','hmtl','css'],
-  },
-  {
-    id: 5,
-    name: 'Abhishek',
-    data: ['backend','nodejs','scaler'],
-  },
-  {
-    id: 6,
-    name: 'Ankita',
-    data: ['reactjs','hmtl','css'],
-  },
-]
+
 export default function App() {
+  const Stack = createNativeStackNavigator();
   return (
-    <View>
-      <Text style={{fontSize: 31, marginTop: 50, marginLeft: 20}}>Section List in React-Native</Text>
-      <SectionList
-      sections={users}
-      renderItem={({item})=><Text style =  {{fontSize: 20}}>{item}</Text>}
-      renderSectionHeader={({section: {name}})=><Text style= {{fontSize:25,color:'red'}} >{name}</Text>}
-      />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator 
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: 'blue',
+        },
+        headerTintColor: 'white',
+        headerTitleStyle: {
+          fontSize: 30,
+        }
+      }}
+      >
+        <Stack.Screen name = 'Login' component={Login}
+        />
+        <Stack.Screen name = 'Home' component={Home}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
+
+
+
 
